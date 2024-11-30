@@ -1,0 +1,12 @@
+Gerekli bağımlılıkların bir dosyaya yazılması önemlidir:
+
+plaintext
+Kodu kopyala
+requests
+python-telegram-bot
+apscheduler
+Bağımlılıkları yüklemek için:
+
+bash
+Kodu kopyala
+pip install -r requirements.txt
