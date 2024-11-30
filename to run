@@ -1,1 +1,42 @@
+Kurulum ve Çalıştırma
+Depoyu Klonla
+
+bash
+Kodu kopyala
+git clone https://github.com/kullanıcı_adı/schengen-visa-bot.git
+cd schengen-visa-bot
+Gerekli Bağımlılıkları Yükle
+
+bash
+Kodu kopyala
+pip install requests python-telegram-bot apscheduler
+Bot Token ve Chat ID Bilgilerini Ayarla
+
+BOT_TOKEN ve CHAT_ID değerlerini main.py içinde güncelle.
+BOT_TOKEN: Telegram botunun API anahtarı.
+CHAT_ID: Bildirim almak istediğin Telegram hesabının chat ID’si.
+Botu Çalıştır
+
+bash
+Kodu kopyala
+python main.py
+Kullanım
+Botu çalıştırdığınızda şu mesajı alırsınız:
+Kodu kopyala
+Bot çalışmaya başladı!
+Belirli aralıklarla (ör. her saat) randevu bilgilerini kontrol eder ve aşağıdaki gibi bir mesaj gönderir:
+less
+Kodu kopyala
+Italy için randevu tarihi: 2024-12-01
+Belgium için mevcut randevu yok.
+Özelleştirme
+API URL: Yeni bir API için API_URL değişkenini güncelleyebilirsiniz.
+Kontrol Sıklığı: Zamanlayıcıyı scheduler.add_job fonksiyonunda interval ayarlarını değiştirerek özelleştirebilirsiniz.
+Proje Yapısı
+plaintext
+Kodu kopyala
+schengen-visa-bot/
+├── main.py           # Ana bot kodu
+├── requirements.txt  # Bağımlılıkları içeren dosya
+├── README.md         # Proje açıklaması
 
