@@ -1,0 +1,35 @@
+import requests
+from telegram import Bot
+from apscheduler.schedulers.blocking import BlockingScheduler
+
+# Telegram bot token
+BOT_TOKEN = "TELEGRAM_BOT_TOKEN"
+CHAT_ID = "TELEGRAM_CHAT_ID"
+bot = Bot(token=BOT_TOKEN)
+
+# API URL
+API_URL = "https://api.schengenvisasappointments.com/api/visa-list/?format=json"
+
+def check_appointments():
+    response = requests.get(API_URL)
+    if response.status_code == 200:
+        data = response.json()
+        message = ""
+        for entry in data:
+            country = entry.get("mission_country", "Bilinmiyor")
+            appointment_date = entry.get("appointment_date", None)
+            if appointment_date:
+                message += f"{country} için randevu tarihi: {appointment_date}\n"
+            else:
+                message += f"{country} için mevcut randevu yok.\n"
+        bot.send_message(chat_id=CHAT_ID, text=message)
+    else:
+        bot.send_message(chat_id=CHAT_ID, text=f"API Hatası: {response.status_code}")
+
+# Scheduler ayarı
+scheduler = BlockingScheduler()
+scheduler.add_job(check_appointments, "interval", hours=1)  # Her 1 saatte bir kontrol
+
+if __name__ == "__main__":
+    bot.send_message(chat_id=CHAT_ID, text="Bot çalışmaya başladı!")
+    scheduler.start()
